@@ -13,7 +13,13 @@ public class AlgorithmCollection {
 
     // --- 1. Sequential Search ---
     /**
-     * Sequential Search
+     * Algorithm (Step by Step):
+     * 1. Start from the first element of the array.
+     * 2. Compare the current element with the key.
+     * 3. If they are equal, return the current index.
+     * 4. If not, move to the next element.
+     * 5. Repeat steps 2-4 until the end of the array.
+     * 6. If the key is not found, return -1.
      *
      * Pseudocode:
      * --------------------------
@@ -49,18 +55,7 @@ public class AlgorithmCollection {
      * Return   i = i + 1
      *  i      (loop back to i < arr.length)
      *
-     * Algorithm (Step by Step):
-     * 1. Start from the first element of the array.
-     * 2. Compare the current element with the key.
-     * 3. If they are equal, return the current index.
-     * 4. If not, move to the next element.
-     * 5. Repeat steps 2-4 until the end of the array.
-     * 6. If the key is not found, return -1.
-     *
-     * Time Complexity:
-     * - Best Case: O(1)   (key is at the first position)
-     * - Worst Case: O(n)  (key is at the last position or not present)
-     * - Average Case: O(n)
+     * Java Implementation:
      */
     public static int sequentialSearch(int[] arr, int key) {
         if (arr == null) return -1;
@@ -69,10 +64,21 @@ public class AlgorithmCollection {
         }
         return -1;
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(1)   (key is at the first position)
+     * - Worst Case: O(n)  (key is at the last position or not present)
+     * - Average Case: O(n)
+     */
 
     // --- 2. Find Maximum Element ---
     /**
-     * Finds the largest element in an array of integers.
+     * Algorithm (Step by Step):
+     * 1. Assume the first element is the maximum.
+     * 2. Compare each subsequent element to the current maximum.
+     * 3. If a larger element is found, update the maximum.
+     * 4. Continue until all elements are checked.
+     * 5. Return the maximum value found.
      *
      * Pseudocode:
      * --------------------------
@@ -115,17 +121,7 @@ public class AlgorithmCollection {
      *   |   Return maxval   |
      *   +-------------------+
      *
-     * Algorithm (Step by Step):
-     * 1. Assume the first element is the maximum.
-     * 2. Compare each subsequent element to the current maximum.
-     * 3. If a larger element is found, update the maximum.
-     * 4. Continue until all elements are checked.
-     * 5. Return the maximum value found.
-     *
-     * Time Complexity:
-     * - Best Case: O(n)
-     * - Worst Case: O(n)
-     * - Average Case: O(n)
+     * Java Implementation:
      */
     public static int findMaxElement(int[] arr) {
         if (arr == null || arr.length == 0) {
@@ -139,10 +135,19 @@ public class AlgorithmCollection {
         }
         return maxval;
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(n)
+     * - Worst Case: O(n)
+     * - Average Case: O(n)
+     */
 
     // --- 3. Check for Unique Elements ---
     /**
-     * Checks if all elements in an array are unique by comparing each element to every other.
+     * Algorithm (Step by Step):
+     * 1. For each element in the array, compare it to every other element after it.
+     * 2. If any two elements are equal, return false.
+     * 3. If no duplicates are found, return true.
      *
      * Pseudocode:
      * --------------------------
@@ -185,15 +190,7 @@ public class AlgorithmCollection {
      *   |   Return true     |
      *   +-------------------+
      *
-     * Algorithm (Step by Step):
-     * 1. For each element in the array, compare it to every other element after it.
-     * 2. If any two elements are equal, return false.
-     * 3. If no duplicates are found, return true.
-     *
-     * Time Complexity:
-     * - Best Case: O(1) (if duplicate found at start)
-     * - Worst Case: O(n^2)
-     * - Average Case: O(n^2)
+     * Java Implementation:
      */
     public static boolean areElementsUnique(int[] arr) {
         if (arr == null) return true;
@@ -207,10 +204,21 @@ public class AlgorithmCollection {
         }
         return true;
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(1) (if duplicate found at start)
+     * - Worst Case: O(n^2)
+     * - Average Case: O(n^2)
+     */
 
     // --- 4. Matrix Multiplication ---
     /**
-     * Multiplies two n x n square matrices (A and B).
+     * Algorithm (Step by Step):
+     * 1. For each row i of matrix A and each column j of matrix B:
+     * 2. Initialize C[i][j] to 0.
+     * 3. For each k from 0 to n-1, multiply A[i][k] by B[k][j] and add to C[i][j].
+     * 4. Repeat for all i and j.
+     * 5. Return the resulting matrix C.
      *
      * Pseudocode:
      * --------------------------
@@ -259,17 +267,7 @@ public class AlgorithmCollection {
      *   |   Return C        |
      *   +-------------------+
      *
-     * Algorithm (Step by Step):
-     * 1. For each row i of matrix A and each column j of matrix B:
-     * 2. Initialize C[i][j] to 0.
-     * 3. For each k from 0 to n-1, multiply A[i][k] by B[k][j] and add to C[i][j].
-     * 4. Repeat for all i and j.
-     * 5. Return the resulting matrix C.
-     *
-     * Time Complexity:
-     * - Best Case: O(n^3)
-     * - Worst Case: O(n^3)
-     * - Average Case: O(n^3)
+     * Java Implementation:
      */
     public static double[][] matrixMultiply(double[][] A, double[][] B) {
         if (A == null || B == null || A.length == 0 || A.length != B.length || A[0].length != A.length) {
@@ -287,10 +285,20 @@ public class AlgorithmCollection {
         }
         return C;
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(n^3)
+     * - Worst Case: O(n^3)
+     * - Average Case: O(n^3)
+     */
 
     // --- 5. Count Binary Digits (Iterative) ---
     /**
-     * Iteratively calculates the number of digits in the binary representation of a positive integer n.
+     * Algorithm (Step by Step):
+     * 1. If n <= 0, return 0.
+     * 2. Initialize count to 1.
+     * 3. While n > 1, increment count and divide n by 2.
+     * 4. When n <= 1, return count.
      *
      * Pseudocode:
      * --------------------------
@@ -328,16 +336,7 @@ public class AlgorithmCollection {
      *   n = n/2
      *   (loop back to n > 1)
      *
-     * Algorithm (Step by Step):
-     * 1. If n <= 0, return 0.
-     * 2. Initialize count to 1.
-     * 3. While n > 1, increment count and divide n by 2.
-     * 4. When n <= 1, return count.
-     *
-     * Time Complexity:
-     * - Best Case: O(1) (n = 1)
-     * - Worst Case: O(log n)
-     * - Average Case: O(log n)
+     * Java Implementation:
      */
     public static int countBinaryDigitsIterative(int n) {
         if (n <= 0) return 0;
@@ -348,10 +347,19 @@ public class AlgorithmCollection {
         }
         return count;
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(1) (n = 1)
+     * - Worst Case: O(log n)
+     * - Average Case: O(log n)
+     */
 
     // --- 6. Factorial (Recursive) ---
     /**
-     * Computes the factorial of a non-negative integer using recursion.
+     * Algorithm (Step by Step):
+     * 1. If n < 0, throw an error (undefined).
+     * 2. If n == 0, return 1.
+     * 3. Otherwise, return n multiplied by the factorial of (n-1).
      *
      * Pseudocode:
      * --------------------------
@@ -382,15 +390,7 @@ public class AlgorithmCollection {
      *           v       v
      *        Return 1  Return n * Factorial(n-1)
      *
-     * Algorithm (Step by Step):
-     * 1. If n < 0, throw an error (undefined).
-     * 2. If n == 0, return 1.
-     * 3. Otherwise, return n multiplied by the factorial of (n-1).
-     *
-     * Time Complexity:
-     * - Best Case: O(1) (n = 0)
-     * - Worst Case: O(n)
-     * - Average Case: O(n)
+     * Java Implementation:
      */
     public static long factorial(int n) {
         if (n < 0) throw new IllegalArgumentException("Factorial is not defined for negative numbers.");
@@ -400,10 +400,19 @@ public class AlgorithmCollection {
             return n * factorial(n - 1);
         }
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(1) (n = 0)
+     * - Worst Case: O(n)
+     * - Average Case: O(n)
+     */
 
     // --- 7. Count Binary Digits (Recursive) ---
     /**
-     * Recursively calculates the number of digits in the binary representation of a positive integer n.
+     * Algorithm (Step by Step):
+     * 1. If n <= 0, return 0.
+     * 2. If n == 1, return 1.
+     * 3. Otherwise, return 1 plus the result of the function called with n/2.
      *
      * Pseudocode:
      * --------------------------
@@ -434,15 +443,7 @@ public class AlgorithmCollection {
      *              v       v
      *           Return 1  Return CountBinaryDigitsRecursive(n/2) + 1
      *
-     * Algorithm (Step by Step):
-     * 1. If n <= 0, return 0.
-     * 2. If n == 1, return 1.
-     * 3. Otherwise, return 1 plus the result of the function called with n/2.
-     *
-     * Time Complexity:
-     * - Best Case: O(1) (n = 1)
-     * - Worst Case: O(log n)
-     * - Average Case: O(log n)
+     * Java Implementation:
      */
     public static int countBinaryDigitsRecursive(int n) {
         if (n <= 0) return 0;
@@ -452,10 +453,21 @@ public class AlgorithmCollection {
             return countBinaryDigitsRecursive(n / 2) + 1;
         }
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(1) (n = 1)
+     * - Worst Case: O(log n)
+     * - Average Case: O(log n)
+     */
 
     // --- 8. Gaussian Elimination ---
     /**
-     * Performs Gaussian elimination on an n x (n+1) augmented matrix to convert it to row-echelon form.
+     * Algorithm (Step by Step):
+     * 1. For each row i from 0 to n-2:
+     * 2. If the pivot A[i][i] is zero, warn and continue.
+     * 3. For each row j below i, compute the factor for elimination.
+     * 4. Subtract factor times the i-th row from the j-th row for all columns.
+     * 5. Repeat for all rows to form upper triangular (row-echelon) form.
      *
      * Pseudocode:
      * --------------------------
@@ -500,17 +512,7 @@ public class AlgorithmCollection {
      *   |   End             |
      *   +-------------------+
      *
-     * Algorithm (Step by Step):
-     * 1. For each row i from 0 to n-2:
-     * 2. If the pivot A[i][i] is zero, warn and continue.
-     * 3. For each row j below i, compute the factor for elimination.
-     * 4. Subtract factor times the i-th row from the j-th row for all columns.
-     * 5. Repeat for all rows to form upper triangular (row-echelon) form.
-     *
-     * Time Complexity:
-     * - Best Case: O(n^3)
-     * - Worst Case: O(n^3)
-     * - Average Case: O(n^3)
+     * Java Implementation:
      */
     public static void gaussianElimination(double[][] A) {
         if (A == null || A.length == 0) return;
@@ -528,6 +530,12 @@ public class AlgorithmCollection {
             }
         }
     }
+    /**
+     * Time Complexity:
+     * - Best Case: O(n^3)
+     * - Worst Case: O(n^3)
+     * - Average Case: O(n^3)
+     */
 
     // --- Main Method for Demonstration ---
     public static void main(String[] args) {
