@@ -584,12 +584,17 @@ public class AlgorithmCollection {
         for (int i = 0; i < n; i++) arr[i] = scanner.nextInt();
         System.out.print("Enter key to search for: ");
         int key = scanner.nextInt();
+
+        long startTime = System.nanoTime();
         int result = sequentialSearch(arr, key);
+        long endTime = System.nanoTime();
+
         if (result != -1) {
             System.out.println("Key found at index: " + result);
         } else {
             System.out.println("Key not found.");
         }
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 
     private static void demoMaxElement(Scanner scanner) {
@@ -598,8 +603,13 @@ public class AlgorithmCollection {
         int[] arr = new int[n];
         System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) arr[i] = scanner.nextInt();
+
+        long startTime = System.nanoTime();
         int max = findMaxElement(arr);
+        long endTime = System.nanoTime();
+
         System.out.println("The maximum element is: " + max);
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 
     private static void demoUniqueElements(Scanner scanner) {
@@ -608,12 +618,17 @@ public class AlgorithmCollection {
         int[] arr = new int[n];
         System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) arr[i] = scanner.nextInt();
+
+        long startTime = System.nanoTime();
         boolean isUnique = areElementsUnique(arr);
+        long endTime = System.nanoTime();
+
         if (isUnique) {
             System.out.println("All elements are unique.");
         } else {
             System.out.println("The array contains duplicate elements.");
         }
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 
     private static void demoMatrixMultiplication(Scanner scanner) {
@@ -625,32 +640,52 @@ public class AlgorithmCollection {
         for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) A[i][j] = scanner.nextDouble();
         System.out.println("Enter elements for Matrix B:");
         for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) B[i][j] = scanner.nextDouble();
+
+        long startTime = System.nanoTime();
         double[][] C = matrixMultiply(A, B);
+        long endTime = System.nanoTime();
+
         System.out.println("Result Matrix C = A * B:");
         for (int i = 0; i < n; i++) {
             System.out.println(Arrays.toString(C[i]));
         }
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 
     private static void demoBinaryDigitsIterative(Scanner scanner) {
         System.out.print("Enter a positive integer: ");
         int n = scanner.nextInt();
+
+        long startTime = System.nanoTime();
         int count = countBinaryDigitsIterative(n);
+        long endTime = System.nanoTime();
+
         System.out.println("Number of binary digits (iterative): " + count);
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 
     private static void demoFactorial(Scanner scanner) {
         System.out.print("Enter a non-negative integer (e.g., 0-20): ");
         int n = scanner.nextInt();
+
+        long startTime = System.nanoTime();
         long result = factorial(n);
+        long endTime = System.nanoTime();
+
         System.out.println("Factorial of " + n + " is: " + result);
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 
     private static void demoBinaryDigitsRecursive(Scanner scanner) {
         System.out.print("Enter a positive integer: ");
         int n = scanner.nextInt();
+
+        long startTime = System.nanoTime();
         int count = countBinaryDigitsRecursive(n);
+        long endTime = System.nanoTime();
+
         System.out.println("Number of binary digits (recursive): " + count);
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 
     private static void demoGaussianElimination(Scanner scanner) {
@@ -664,7 +699,11 @@ public class AlgorithmCollection {
                 A[i][j] = scanner.nextDouble();
             }
         }
+
+        long startTime = System.nanoTime();
         gaussianElimination(A);
+        long endTime = System.nanoTime();
+
         System.out.println("Matrix in Row-Echelon Form:");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n + 1; j++) {
@@ -672,5 +711,6 @@ public class AlgorithmCollection {
             }
             System.out.println();
         }
+        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
     }
 }
