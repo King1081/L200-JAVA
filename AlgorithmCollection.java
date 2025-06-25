@@ -2,17 +2,12 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 /**
- * A collection of algorithms from the provided document, all implemented in Java.
- * This single class includes methods for:
- * - Sequential Search
- * - Finding the Maximum Element
- * - Checking for Unique Elements
- * - Matrix Multiplication
- * - Iterative and Recursive Binary Digit Counting
- * - Recursive Factorial
- * - Gaussian Elimination
- *
- * The main method provides a menu to demonstrate each algorithm.
+ * A collection of classic algorithms, each with:
+ * - Pseudocode
+ * - ASCII flowchart
+ * - Step-by-step algorithm description
+ * - Time complexity analysis
+ * - Java implementation
  */
 public class AlgorithmCollection {
 
@@ -31,7 +26,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     * 
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -70,16 +64,10 @@ public class AlgorithmCollection {
      */
     public static int sequentialSearch(int[] arr, int key) {
         if (arr == null) return -1;
-        int n = arr.length;
-        int i = 0;
-        while (i < n && arr[i] != key) {
-            i++;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == key) return i;
         }
-        if (i < n) {
-            return i;
-        } else {
-            return -1;
-        }
+        return -1;
     }
 
     // --- 2. Find Maximum Element ---
@@ -98,7 +86,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     *
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -139,10 +126,6 @@ public class AlgorithmCollection {
      * - Best Case: O(n)
      * - Worst Case: O(n)
      * - Average Case: O(n)
-     *
-     * @param arr The array of integers to search.
-     * @return The largest integer value in the array.
-     * @throws IllegalArgumentException if the array is null or empty.
      */
     public static int findMaxElement(int[] arr) {
         if (arr == null || arr.length == 0) {
@@ -173,7 +156,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     *
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -212,9 +194,6 @@ public class AlgorithmCollection {
      * - Best Case: O(1) (if duplicate found at start)
      * - Worst Case: O(n^2)
      * - Average Case: O(n^2)
-     *
-     * @param arr The array of integers to check.
-     * @return true if all elements are unique, false otherwise.
      */
     public static boolean areElementsUnique(int[] arr) {
         if (arr == null) return true;
@@ -246,7 +225,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     *
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -292,10 +270,6 @@ public class AlgorithmCollection {
      * - Best Case: O(n^3)
      * - Worst Case: O(n^3)
      * - Average Case: O(n^3)
-     *
-     * @param A The first n x n matrix.
-     * @param B The second n x n matrix.
-     * @return The resulting n x n matrix C = A * B. Returns null if matrices are invalid.
      */
     public static double[][] matrixMultiply(double[][] A, double[][] B) {
         if (A == null || B == null || A.length == 0 || A.length != B.length || A[0].length != A.length) {
@@ -313,7 +287,7 @@ public class AlgorithmCollection {
         }
         return C;
     }
-    
+
     // --- 5. Count Binary Digits (Iterative) ---
     /**
      * Iteratively calculates the number of digits in the binary representation of a positive integer n.
@@ -332,7 +306,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     *
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -393,7 +366,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     *
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -446,7 +418,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     *
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -501,7 +472,6 @@ public class AlgorithmCollection {
      * --------------------------
      *
      * Flowchart (ASCII):
-     *
      *   +-------------------+
      *   |   Start           |
      *   +-------------------+
@@ -541,20 +511,16 @@ public class AlgorithmCollection {
      * - Best Case: O(n^3)
      * - Worst Case: O(n^3)
      * - Average Case: O(n^3)
-     *
-     * @param A The n x (n+1) augmented matrix, which is modified in place.
      */
     public static void gaussianElimination(double[][] A) {
         if (A == null || A.length == 0) return;
         int n = A.length;
         for (int i = 0; i < n - 1; i++) {
-            // Simple check for zero pivot. A robust implementation would use row swapping.
             if (A[i][i] == 0) {
                 System.out.println("Warning: Zero pivot encountered at A[" + i + "][" + i + "]. Algorithm may fail.");
-                // Continue, but results might be incorrect.
             }
             for (int j = i + 1; j < n; j++) {
-                if(A[i][i] == 0) continue; // Avoid division by zero
+                if (A[i][i] == 0) continue;
                 double factor = A[j][i] / A[i][i];
                 for (int k = i; k < n + 1; k++) {
                     A[j][k] -= factor * A[i][k];
@@ -567,7 +533,6 @@ public class AlgorithmCollection {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
-
         while (choice != 0) {
             System.out.println("\n--- Algorithm Demonstration Menu ---");
             System.out.println("1. Sequential Search");
@@ -580,40 +545,19 @@ public class AlgorithmCollection {
             System.out.println("8. Gaussian Elimination");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
-
             try {
                 choice = scanner.nextInt();
-
                 switch (choice) {
-                    case 1:
-                        demoSequentialSearch(scanner);
-                        break;
-                    case 2:
-                        demoMaxElement(scanner);
-                        break;
-                    case 3:
-                        demoUniqueElements(scanner);
-                        break;
-                    case 4:
-                        demoMatrixMultiplication(scanner);
-                        break;
-                    case 5:
-                        demoBinaryDigitsIterative(scanner);
-                        break;
-                    case 6:
-                        demoFactorial(scanner);
-                        break;
-                    case 7:
-                        demoBinaryDigitsRecursive(scanner);
-                        break;
-                    case 8:
-                        demoGaussianElimination(scanner);
-                        break;
-                    case 0:
-                        System.out.println("Exiting...");
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
+                    case 1: demoSequentialSearch(scanner); break;
+                    case 2: demoMaxElement(scanner); break;
+                    case 3: demoUniqueElements(scanner); break;
+                    case 4: demoMatrixMultiplication(scanner); break;
+                    case 5: demoBinaryDigitsIterative(scanner); break;
+                    case 6: demoFactorial(scanner); break;
+                    case 7: demoBinaryDigitsRecursive(scanner); break;
+                    case 8: demoGaussianElimination(scanner); break;
+                    case 0: System.out.println("Exiting..."); break;
+                    default: System.out.println("Invalid choice. Please try again.");
                 }
             } catch (Exception e) {
                 System.out.println("An error occurred: " + e.getMessage());
@@ -673,9 +617,7 @@ public class AlgorithmCollection {
         for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) A[i][j] = scanner.nextDouble();
         System.out.println("Enter elements for Matrix B:");
         for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) B[i][j] = scanner.nextDouble();
-        
         double[][] C = matrixMultiply(A, B);
-        
         System.out.println("Result Matrix C = A * B:");
         for (int i = 0; i < n; i++) {
             System.out.println(Arrays.toString(C[i]));
@@ -688,7 +630,7 @@ public class AlgorithmCollection {
         int count = countBinaryDigitsIterative(n);
         System.out.println("Number of binary digits (iterative): " + count);
     }
-    
+
     private static void demoFactorial(Scanner scanner) {
         System.out.print("Enter a non-negative integer (e.g., 0-20): ");
         int n = scanner.nextInt();
@@ -714,12 +656,10 @@ public class AlgorithmCollection {
                 A[i][j] = scanner.nextDouble();
             }
         }
-        
         gaussianElimination(A);
-        
         System.out.println("Matrix in Row-Echelon Form:");
         for (int i = 0; i < n; i++) {
-            for(int j=0; j < n+1; j++) {
+            for (int j = 0; j < n + 1; j++) {
                 System.out.printf("%8.2f ", A[i][j]);
             }
             System.out.println();
