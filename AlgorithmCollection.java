@@ -585,6 +585,21 @@ public class AlgorithmCollection {
         System.out.print("Enter key to search for: ");
         int key = scanner.nextInt();
 
+        // Best Case: key at index 0
+        long bestStart = System.nanoTime();
+        sequentialSearch(arr, arr.length > 0 ? arr[0] : key);
+        long bestEnd = System.nanoTime();
+
+        // Average Case: key at middle
+        long avgStart = System.nanoTime();
+        sequentialSearch(arr, arr.length > 0 ? arr[arr.length / 2] : key);
+        long avgEnd = System.nanoTime();
+
+        // Worst Case: key not present
+        long worstStart = System.nanoTime();
+        sequentialSearch(arr, Integer.MIN_VALUE);
+        long worstEnd = System.nanoTime();
+
         long startTime = System.nanoTime();
         int result = sequentialSearch(arr, key);
         long endTime = System.nanoTime();
@@ -594,7 +609,10 @@ public class AlgorithmCollection {
         } else {
             System.out.println("Key not found.");
         }
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best Case Time: " + (bestEnd - bestStart) + " ns (O(1))");
+        System.out.println("Average Case Time: " + (avgEnd - avgStart) + " ns (O(n))");
+        System.out.println("Worst Case Time: " + (worstEnd - worstStart) + " ns (O(n))");
     }
 
     private static void demoMaxElement(Scanner scanner) {
@@ -604,12 +622,26 @@ public class AlgorithmCollection {
         System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) arr[i] = scanner.nextInt();
 
+        // Best, Average, Worst are all O(n) for this algorithm
+        long bestStart = System.nanoTime();
+        findMaxElement(arr);
+        long bestEnd = System.nanoTime();
+
+        long avgStart = System.nanoTime();
+        findMaxElement(arr);
+        long avgEnd = System.nanoTime();
+
+        long worstStart = System.nanoTime();
+        findMaxElement(arr);
+        long worstEnd = System.nanoTime();
+
         long startTime = System.nanoTime();
         int max = findMaxElement(arr);
         long endTime = System.nanoTime();
 
         System.out.println("The maximum element is: " + max);
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best/Average/Worst Case Time: " + (bestEnd - bestStart) + " ns (O(n))");
     }
 
     private static void demoUniqueElements(Scanner scanner) {
@@ -619,6 +651,27 @@ public class AlgorithmCollection {
         System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) arr[i] = scanner.nextInt();
 
+        // Best Case: duplicate at start
+        if (n > 1) arr[1] = arr[0];
+        long bestStart = System.nanoTime();
+        areElementsUnique(arr);
+        long bestEnd = System.nanoTime();
+
+        // Average Case: all unique
+        for (int i = 0; i < n; i++) arr[i] = i;
+        long avgStart = System.nanoTime();
+        areElementsUnique(arr);
+        long avgEnd = System.nanoTime();
+
+        // Worst Case: duplicate at end
+        if (n > 1) arr[n - 1] = arr[0];
+        long worstStart = System.nanoTime();
+        areElementsUnique(arr);
+        long worstEnd = System.nanoTime();
+
+        // User run
+        System.out.print("Re-enter array elements for your run:\n");
+        for (int i = 0; i < n; i++) arr[i] = scanner.nextInt();
         long startTime = System.nanoTime();
         boolean isUnique = areElementsUnique(arr);
         long endTime = System.nanoTime();
@@ -628,7 +681,9 @@ public class AlgorithmCollection {
         } else {
             System.out.println("The array contains duplicate elements.");
         }
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best Case Time: " + (bestEnd - bestStart) + " ns (O(1))");
+        System.out.println("Average/Worst Case Time: " + (avgEnd - avgStart) + "/" + (worstEnd - worstStart) + " ns (O(n^2))");
     }
 
     private static void demoMatrixMultiplication(Scanner scanner) {
@@ -641,6 +696,19 @@ public class AlgorithmCollection {
         System.out.println("Enter elements for Matrix B:");
         for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) B[i][j] = scanner.nextDouble();
 
+        // All cases O(n^3)
+        long bestStart = System.nanoTime();
+        matrixMultiply(A, B);
+        long bestEnd = System.nanoTime();
+
+        long avgStart = System.nanoTime();
+        matrixMultiply(A, B);
+        long avgEnd = System.nanoTime();
+
+        long worstStart = System.nanoTime();
+        matrixMultiply(A, B);
+        long worstEnd = System.nanoTime();
+
         long startTime = System.nanoTime();
         double[][] C = matrixMultiply(A, B);
         long endTime = System.nanoTime();
@@ -649,43 +717,92 @@ public class AlgorithmCollection {
         for (int i = 0; i < n; i++) {
             System.out.println(Arrays.toString(C[i]));
         }
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best/Average/Worst Case Time: " + (bestEnd - bestStart) + " ns (O(n^3))");
     }
 
     private static void demoBinaryDigitsIterative(Scanner scanner) {
         System.out.print("Enter a positive integer: ");
         int n = scanner.nextInt();
 
+        // Best Case: n = 1
+        long bestStart = System.nanoTime();
+        countBinaryDigitsIterative(1);
+        long bestEnd = System.nanoTime();
+
+        // Average/Worst Case: n large
+        long avgStart = System.nanoTime();
+        countBinaryDigitsIterative(n);
+        long avgEnd = System.nanoTime();
+
+        long worstStart = System.nanoTime();
+        countBinaryDigitsIterative(Integer.MAX_VALUE);
+        long worstEnd = System.nanoTime();
+
         long startTime = System.nanoTime();
         int count = countBinaryDigitsIterative(n);
         long endTime = System.nanoTime();
 
         System.out.println("Number of binary digits (iterative): " + count);
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best Case Time: " + (bestEnd - bestStart) + " ns (O(1))");
+        System.out.println("Average/Worst Case Time: " + (avgEnd - avgStart) + "/" + (worstEnd - worstStart) + " ns (O(log n))");
     }
 
     private static void demoFactorial(Scanner scanner) {
         System.out.print("Enter a non-negative integer (e.g., 0-20): ");
         int n = scanner.nextInt();
 
+        // Best Case: n = 0
+        long bestStart = System.nanoTime();
+        factorial(0);
+        long bestEnd = System.nanoTime();
+
+        // Average/Worst Case: n large
+        long avgStart = System.nanoTime();
+        factorial(n);
+        long avgEnd = System.nanoTime();
+
+        long worstStart = System.nanoTime();
+        factorial(20);
+        long worstEnd = System.nanoTime();
+
         long startTime = System.nanoTime();
         long result = factorial(n);
         long endTime = System.nanoTime();
 
         System.out.println("Factorial of " + n + " is: " + result);
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best Case Time: " + (bestEnd - bestStart) + " ns (O(1))");
+        System.out.println("Average/Worst Case Time: " + (avgEnd - avgStart) + "/" + (worstEnd - worstStart) + " ns (O(n))");
     }
 
     private static void demoBinaryDigitsRecursive(Scanner scanner) {
         System.out.print("Enter a positive integer: ");
         int n = scanner.nextInt();
 
+        // Best Case: n = 1
+        long bestStart = System.nanoTime();
+        countBinaryDigitsRecursive(1);
+        long bestEnd = System.nanoTime();
+
+        // Average/Worst Case: n large
+        long avgStart = System.nanoTime();
+        countBinaryDigitsRecursive(n);
+        long avgEnd = System.nanoTime();
+
+        long worstStart = System.nanoTime();
+        countBinaryDigitsRecursive(Integer.MAX_VALUE);
+        long worstEnd = System.nanoTime();
+
         long startTime = System.nanoTime();
         int count = countBinaryDigitsRecursive(n);
         long endTime = System.nanoTime();
 
         System.out.println("Number of binary digits (recursive): " + count);
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best Case Time: " + (bestEnd - bestStart) + " ns (O(1))");
+        System.out.println("Average/Worst Case Time: " + (avgEnd - avgStart) + "/" + (worstEnd - worstStart) + " ns (O(log n))");
     }
 
     private static void demoGaussianElimination(Scanner scanner) {
@@ -700,6 +817,19 @@ public class AlgorithmCollection {
             }
         }
 
+        // All cases O(n^3)
+        long bestStart = System.nanoTime();
+        gaussianElimination(A);
+        long bestEnd = System.nanoTime();
+
+        long avgStart = System.nanoTime();
+        gaussianElimination(A);
+        long avgEnd = System.nanoTime();
+
+        long worstStart = System.nanoTime();
+        gaussianElimination(A);
+        long worstEnd = System.nanoTime();
+
         long startTime = System.nanoTime();
         gaussianElimination(A);
         long endTime = System.nanoTime();
@@ -711,6 +841,7 @@ public class AlgorithmCollection {
             }
             System.out.println();
         }
-        System.out.println("Run time: " + (endTime - startTime) + " nanoseconds");
+        System.out.println("Run time: " + (endTime - startTime) + " ns");
+        System.out.println("Best/Average/Worst Case Time: " + (bestEnd - bestStart) + " ns (O(n^3))");
     }
 }
