@@ -317,8 +317,54 @@ public class AlgorithmCollection {
     // --- 5. Count Binary Digits (Iterative) ---
     /**
      * Iteratively calculates the number of digits in the binary representation of a positive integer n.
-     * @param n A positive integer.
-     * @return The number of binary digits.
+     *
+     * Pseudocode:
+     * --------------------------
+     * procedure CountBinaryDigitsIterative(n)
+     *     if n <= 0 then
+     *         return 0
+     *     count = 1
+     *     while n > 1 do
+     *         count = count + 1
+     *         n = n / 2
+     *     return count
+     * end procedure
+     * --------------------------
+     *
+     * Flowchart (ASCII):
+     *
+     *   +-------------------+
+     *   |   Start           |
+     *   +-------------------+
+     *            |
+     *            v
+     *   +-------------------+
+     *   | n <= 0 ?          |
+     *   +-------------------+
+     *      | Yes   | No
+     *      v       v
+     *   Return 0  count = 1
+     *              |
+     *              v
+     *   +-------------------+
+     *   | n > 1 ?           |
+     *   +-------------------+
+     *      | Yes   | No
+     *      v       v
+     *   count++   Return count
+     *   n = n/2
+     *   (loop back to n > 1)
+     *
+     * Algorithm (Step by Step):
+     * 1. If n <= 0, return 0.
+     * 2. Initialize count to 1.
+     * 3. While n > 1, increment count and divide n by 2.
+     * 4. When n <= 1, return count.
+     *
+     * Time Complexity:
+     * - Best Case: O(1) (n = 1)
+     * - Worst Case: O(log n)
+     * - Average Case: O(log n)
      */
     public static int countBinaryDigitsIterative(int n) {
         if (n <= 0) return 0;
@@ -333,8 +379,46 @@ public class AlgorithmCollection {
     // --- 6. Factorial (Recursive) ---
     /**
      * Computes the factorial of a non-negative integer using recursion.
-     * @param n A non-negative integer. (Should be <= 20 for 'long' type).
-     * @return The factorial of n (n!).
+     *
+     * Pseudocode:
+     * --------------------------
+     * procedure Factorial(n)
+     *     if n < 0 then
+     *         error "undefined"
+     *     if n == 0 then
+     *         return 1
+     *     else
+     *         return n * Factorial(n - 1)
+     * end procedure
+     * --------------------------
+     *
+     * Flowchart (ASCII):
+     *
+     *   +-------------------+
+     *   |   Start           |
+     *   +-------------------+
+     *            |
+     *            v
+     *   +-------------------+
+     *   | n < 0 ?           |
+     *   +-------------------+
+     *      | Yes   | No
+     *      v       v
+     *   Error   n == 0 ?
+     *           +-------------------+
+     *           | Yes   | No        |
+     *           v       v
+     *        Return 1  Return n * Factorial(n-1)
+     *
+     * Algorithm (Step by Step):
+     * 1. If n < 0, throw an error (undefined).
+     * 2. If n == 0, return 1.
+     * 3. Otherwise, return n multiplied by the factorial of (n-1).
+     *
+     * Time Complexity:
+     * - Best Case: O(1) (n = 0)
+     * - Worst Case: O(n)
+     * - Average Case: O(n)
      */
     public static long factorial(int n) {
         if (n < 0) throw new IllegalArgumentException("Factorial is not defined for negative numbers.");
@@ -348,8 +432,46 @@ public class AlgorithmCollection {
     // --- 7. Count Binary Digits (Recursive) ---
     /**
      * Recursively calculates the number of digits in the binary representation of a positive integer n.
-     * @param n A positive integer.
-     * @return The number of binary digits.
+     *
+     * Pseudocode:
+     * --------------------------
+     * procedure CountBinaryDigitsRecursive(n)
+     *     if n <= 0 then
+     *         return 0
+     *     if n == 1 then
+     *         return 1
+     *     else
+     *         return CountBinaryDigitsRecursive(n / 2) + 1
+     * end procedure
+     * --------------------------
+     *
+     * Flowchart (ASCII):
+     *
+     *   +-------------------+
+     *   |   Start           |
+     *   +-------------------+
+     *            |
+     *            v
+     *   +-------------------+
+     *   | n <= 0 ?          |
+     *   +-------------------+
+     *      | Yes   | No
+     *      v       v
+     *   Return 0  n == 1 ?
+     *              +-------------------+
+     *              | Yes   | No        |
+     *              v       v
+     *           Return 1  Return CountBinaryDigitsRecursive(n/2) + 1
+     *
+     * Algorithm (Step by Step):
+     * 1. If n <= 0, return 0.
+     * 2. If n == 1, return 1.
+     * 3. Otherwise, return 1 plus the result of the function called with n/2.
+     *
+     * Time Complexity:
+     * - Best Case: O(1) (n = 1)
+     * - Worst Case: O(log n)
+     * - Average Case: O(log n)
      */
     public static int countBinaryDigitsRecursive(int n) {
         if (n <= 0) return 0;
@@ -363,6 +485,63 @@ public class AlgorithmCollection {
     // --- 8. Gaussian Elimination ---
     /**
      * Performs Gaussian elimination on an n x (n+1) augmented matrix to convert it to row-echelon form.
+     *
+     * Pseudocode:
+     * --------------------------
+     * procedure GaussianElimination(A)
+     *     for i = 0 to n-2 do
+     *         if A[i][i] == 0 then
+     *             warning "Zero pivot"
+     *         for j = i+1 to n-1 do
+     *             if A[i][i] == 0 then continue
+     *             factor = A[j][i] / A[i][i]
+     *             for k = i to n do
+     *                 A[j][k] = A[j][k] - factor * A[i][k]
+     * end procedure
+     * --------------------------
+     *
+     * Flowchart (ASCII):
+     *
+     *   +-------------------+
+     *   |   Start           |
+     *   +-------------------+
+     *            |
+     *            v
+     *   +-------------------+
+     *   | for i = 0 to n-2  |
+     *   +-------------------+
+     *            |
+     *            v
+     *   +-------------------+
+     *   | A[i][i] == 0 ?    |
+     *   +-------------------+
+     *      | Yes   | No
+     *      v       v
+     *   Warn    for j = i+1 to n-1
+     *              |
+     *              v
+     *         A[i][i] == 0 ?
+     *           | Yes   | No
+     *           v       v
+     *         continue  factor = A[j][i]/A[i][i]
+     *                   for k = i to n
+     *                       A[j][k] -= factor * A[i][k]
+     *   +-------------------+
+     *   |   End             |
+     *   +-------------------+
+     *
+     * Algorithm (Step by Step):
+     * 1. For each row i from 0 to n-2:
+     * 2. If the pivot A[i][i] is zero, warn and continue.
+     * 3. For each row j below i, compute the factor for elimination.
+     * 4. Subtract factor times the i-th row from the j-th row for all columns.
+     * 5. Repeat for all rows to form upper triangular (row-echelon) form.
+     *
+     * Time Complexity:
+     * - Best Case: O(n^3)
+     * - Worst Case: O(n^3)
+     * - Average Case: O(n^3)
+     *
      * @param A The n x (n+1) augmented matrix, which is modified in place.
      */
     public static void gaussianElimination(double[][] A) {
