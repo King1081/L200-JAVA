@@ -679,6 +679,26 @@ public class AlgorithmCollection {
         if (isUnique) {
             System.out.println("All elements are unique.");
         } else {
+            // Find and display unique and duplicate elements
+            java.util.Set<Integer> seen = new java.util.HashSet<>();
+            java.util.Set<Integer> duplicates = new java.util.HashSet<>();
+            for (int value : arr) {
+                if (!seen.add(value)) {
+                    duplicates.add(value);
+                }
+            }
+            System.out.print("Unique elements: ");
+            for (int value : arr) {
+                if (!duplicates.contains(value)) {
+                    System.out.print(value + " ");
+                }
+            }
+            System.out.println();
+            System.out.print("Duplicate elements: ");
+            for (int value : duplicates) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
             System.out.println("The array contains duplicate elements.");
         }
         System.out.println("Run time: " + (endTime - startTime) + " ns");
