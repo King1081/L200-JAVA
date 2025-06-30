@@ -690,7 +690,7 @@ public class AlgorithmCollection {
             System.out.print("Unique elements: ");
             for (int value : arr) {
                 if (!duplicates.contains(value)) {
-                    System.out.print(value + " ");
+                    System.out.print(value + " "); 
                 }
             }
             System.out.println();
