@@ -652,21 +652,24 @@ public class AlgorithmCollection {
         for (int i = 0; i < n; i++) arr[i] = scanner.nextInt();
 
         // Best Case: duplicate at start
-        if (n > 1) arr[1] = arr[0];
+        int[] bestArr = Arrays.copyOf(arr, n);
+        if (n > 1) bestArr[1] = bestArr[0];
         long bestStart = System.nanoTime();
-        areElementsUnique(arr);
+        areElementsUnique(bestArr);
         long bestEnd = System.nanoTime();
 
         // Average Case: all unique
-        for (int i = 0; i < n; i++) arr[i] = i;
+        int[] avgArr = new int[n];
+        for (int i = 0; i < n; i++) avgArr[i] = i;
         long avgStart = System.nanoTime();
-        areElementsUnique(arr);
+        areElementsUnique(avgArr);
         long avgEnd = System.nanoTime();
 
         // Worst Case: duplicate at end
-        if (n > 1) arr[n - 1] = arr[0];
+        int[] worstArr = Arrays.copyOf(avgArr, n);
+        if (n > 1) worstArr[n - 1] = worstArr[0];
         long worstStart = System.nanoTime();
-        areElementsUnique(arr);
+        areElementsUnique(worstArr);
         long worstEnd = System.nanoTime();
 
         // User run
@@ -682,16 +685,20 @@ public class AlgorithmCollection {
             // Find and display unique and duplicate elements
             java.util.Set<Integer> seen = new java.util.HashSet<>();
             java.util.Set<Integer> duplicates = new java.util.HashSet<>();
+            java.util.Set<Integer> uniques = new java.util.LinkedHashSet<>();
             for (int value : arr) {
                 if (!seen.add(value)) {
                     duplicates.add(value);
+                } else {
+                    uniques.add(value);
                 }
             }
+            // Remove duplicates from uniques set
+            uniques.removeAll(duplicates);
+
             System.out.print("Unique elements: ");
-            for (int value : arr) {
-                if (!duplicates.contains(value)) {
-                    System.out.print(value + " "); 
-                }
+            for (int value : uniques) {
+                System.out.print(value + " ");
             }
             System.out.println();
             System.out.print("Duplicate elements: ");
@@ -699,11 +706,12 @@ public class AlgorithmCollection {
                 System.out.print(value + " ");
             }
             System.out.println();
-            System.out.println("The array contains duplicate elements.");
+            System.out.println("Therefore, the array contains duplicate elements.");
         }
         System.out.println("Run time: " + (endTime - startTime) + " ns");
         System.out.println("Best Case Time: " + (bestEnd - bestStart) + " ns (O(1))");
-        System.out.println("Average/Worst Case Time: " + (avgEnd - avgStart) + "/" + (worstEnd - worstStart) + " ns (O(n^2))");
+        System.out.println("Average Case Time: " + (avgEnd - avgStart) + " ns (O(n^2))");
+        System.out.println("Worst Case Time: " + (worstEnd - worstStart) + " ns (O(n^2))");
     }
 
     private static void demoMatrixMultiplication(Scanner scanner) {
