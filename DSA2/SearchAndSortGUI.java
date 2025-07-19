@@ -1,13 +1,10 @@
 package DSA2;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.util.Arrays;
 
@@ -18,6 +15,7 @@ public class SearchAndSortGUI extends Application {
     private TextField arrayInputTextField;
     private TextField keyInputTextField;
     private Label keyInputLabel;
+    private Button runButton;
     private TextArea resultTextArea;
 
     public static void main(String[] args) {
@@ -28,77 +26,107 @@ public class SearchAndSortGUI extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Search and Sort Algorithm Analyzer");
 
-        // --- UI Components ---
-        Label titleLabel = new Label("Search and Sort Algorithm Analyzer");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        // Initialize UI components
+        initComponents();
 
+        // Create the layout
+        BorderPane root = createLayout();
+
+        // Set up event handlers
+        setupEventHandlers();
+
+        // Set the initial state of the UI
+        updateAlgorithmChoices();
+        updateKeyFieldVisibility();
+
+        // Set up the scene and show the stage
+        Scene scene = new Scene(root, 650, 600);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private void initComponents() {
         // Algorithm Selection
         algorithmTypeComboBox = new ComboBox<>();
         algorithmTypeComboBox.getItems().addAll("Searching", "Sorting");
-        algorithmTypeComboBox.setValue("Sorting"); // Default value
+        algorithmTypeComboBox.setValue("Sorting");
 
         algorithmComboBox = new ComboBox<>();
+        algorithmComboBox.setMaxWidth(Double.MAX_VALUE);
 
         // Input Fields
-        Label arrayInputLabel = new Label("Enter numbers (comma-separated):");
         arrayInputTextField = new TextField();
+        arrayInputTextField.setMaxWidth(Double.MAX_VALUE);
         arrayInputTextField.setPromptText("e.g., 5, 1, 9, 3, 7");
 
         keyInputLabel = new Label("Enter key to search for:");
         keyInputTextField = new TextField();
+        keyInputTextField.setMaxWidth(Double.MAX_VALUE);
 
         // Results Area
         resultTextArea = new TextArea();
         resultTextArea.setEditable(false);
         resultTextArea.setWrapText(true);
 
-        // Run Button
-        Button runButton = new Button("Run Algorithm");
+        //Buttons
+        runButton = new Button("Run Algorithm");
+    }
 
-        // --- Layout ---
+    private BorderPane createLayout() {
         BorderPane root = new BorderPane();
-        root.setPadding(new Insets(15));
+        root.getStyleClass().add("root");
 
-        // Top: Title
+        // Title
+        Label titleLabel = new Label("Search and Sort Algorithm Analyzer");
+        titleLabel.setId("title-label");
         HBox titleBox = new HBox(titleLabel);
         titleBox.setAlignment(Pos.CENTER);
         root.setTop(titleBox);
 
         // Center: Controls and Inputs
+        GridPane grid = createInputGrid();
+        VBox centerBox = new VBox(grid, runButton);
+        centerBox.getStyleClass().add("vbox");
+        VBox.setVgrow(grid, Priority.ALWAYS);
+        root.setCenter(centerBox);
+
+        // Bottom: Results
+        VBox resultBox = new VBox(new Label("Results:"), resultTextArea);
+        VBox.setVgrow(resultTextArea, Priority.ALWAYS);
+        resultBox.setId("result-box");
+        root.setBottom(resultBox);
+
+        return root;
+    }
+
+    private GridPane createInputGrid() {
         GridPane grid = new GridPane();
-        grid.setVgap(10);
-        grid.setHgap(10);
-        grid.setPadding(new Insets(20, 0, 20, 0));
+        grid.getStyleClass().add("grid-pane");
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setHgrow(Priority.ALWAYS);
+        grid.getColumnConstraints().addAll(col1, col2);
 
         grid.add(new Label("Algorithm Type:"), 0, 0);
         grid.add(algorithmTypeComboBox, 1, 0);
         grid.add(new Label("Choose Algorithm:"), 0, 1);
         grid.add(algorithmComboBox, 1, 1);
-        grid.add(arrayInputLabel, 0, 2);
+        grid.add(new Label("Enter numbers (comma-separated):"), 0, 2);
         grid.add(arrayInputTextField, 1, 2);
         grid.add(keyInputLabel, 0, 3);
         grid.add(keyInputTextField, 1, 3);
 
-        VBox centerBox = new VBox(15, grid, runButton);
-        centerBox.setAlignment(Pos.CENTER);
-        root.setCenter(centerBox);
+        return grid;
+    }
 
-        // Bottom: Results
-        VBox resultBox = new VBox(5, new Label("Results:"), resultTextArea);
-        root.setBottom(resultBox);
-
-        // --- Event Handlers ---
-        algorithmTypeComboBox.setOnAction(e -> updateAlgorithmChoices());
+    private void setupEventHandlers() {
+        algorithmTypeComboBox.setOnAction(e -> {
+            updateAlgorithmChoices();
+            updateKeyFieldVisibility();
+        });
         runButton.setOnAction(e -> runSelectedAlgorithm());
-
-        // --- Initial UI State ---
-        updateAlgorithmChoices(); // Set initial algorithm choices
-        updateKeyFieldVisibility(); // Set initial field visibility
-
-        // --- Scene Setup ---
-        Scene scene = new Scene(root, 600, 550);
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
     private void updateAlgorithmChoices() {

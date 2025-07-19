@@ -1,0 +1,71 @@
+/* General Styling */
+.root {
+    -fx-padding: 15px;
+    -fx-background-color: #f4f4f4;
+    -fx-font-family: "Arial", sans-serif;
+}
+
+/* Labels */
+.label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #333;
+}
+
+#title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Text Fields and Combo Boxes */
+.text-field, .combo-box {
+    -fx-font-size: 12px;
+    -fx-pref-width: 250px;
+}
+
+/* Button Styling */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Text Area for Results */
+.text-area {
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 12px;
+    -fx-background-color: #ecf0f1;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+
+.text-area .content {
+    -fx-background-color: #ecf0f1;
+}
+
+/* Grid Pane for inputs */
+.grid-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 15px;
+    -fx-padding: 20px 0;
+}
+
+/* VBox containers */
+.vbox {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+}
+
+#result-box {
+    -fx-alignment: top-left;
+    -fx-spacing: 5px;
+}
